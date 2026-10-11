@@ -101,3 +101,31 @@ Gunakan branch fitur untuk perubahan besar, uji secara lokal, lalu push ke GitHu
 [1]: https://vercel.com/docs/git "Deploying Git Repositories with Vercel"
 [2]: https://vercel.com/docs/builds/configure-a-build "Configuring a Build on Vercel"
 [3]: https://docs.netlify.com/build/configure-builds/overview/ "Netlify Build Configuration Overview"
+
+## Skrip cepat sinkronisasi dan testing
+
+Gunakan skrip bawaan repository agar langkah sinkronisasi dan validasi tidak perlu diketik ulang:
+
+```bash
+./scripts/sync-and-test.sh --check-only
+```
+
+Perintah tersebut menyalin `index.html`, `styles.css`, `app.js`, dan `manus-routes.json` ke `public/`, lalu menjalankan pemeriksaan JavaScript dan JSON.
+
+Untuk sekaligus menyalakan preview lokal:
+
+```bash
+./scripts/sync-and-test.sh
+```
+
+Preview tersedia di `http://127.0.0.1:3000`. Port dapat diubah:
+
+```bash
+./scripts/sync-and-test.sh --port 8080
+```
+
+Tekan `Ctrl+C` untuk menghentikan server.
+
+## Audit konfigurasi repository
+
+Repository saat ini sengaja tidak memiliki `package.json`, `vercel.json`, `netlify.toml`, Dockerfile, atau workflow GitHub Actions. Website ini adalah static HTML/CSS/JavaScript tanpa proses build dan tanpa backend. Pengaturan `public/` dapat diisi melalui dashboard Vercel/Netlify seperti panduan di atas; skrip lokal menangani sinkronisasi output sebelum push.
