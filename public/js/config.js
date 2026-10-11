@@ -5,8 +5,8 @@ export const SITE = {
   // Public Web3Forms access key (https://web3forms.com). Empty = WhatsApp-only mode.
   web3formsKey: '',
   // Leave a value empty to hide that icon in the footer.
-  instagramUrl: '',
-  email: '',
+  instagramUrl: 'https://www.instagram.com/chaalicious/',
+  email: 'risaafifa73@gmail.com',
   storagePrefix: 'nusabyicha-',
 };
 

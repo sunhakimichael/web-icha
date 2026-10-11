@@ -155,12 +155,23 @@ function initContactLinks() {
   });
 }
 
+function showToast(message) {
+  const box = document.querySelector('[data-toast-box]');
+  box.textContent = message;
+  box.classList.add('show');
+  window.clearTimeout(showToast.timer);
+  showToast.timer = window.setTimeout(() => box.classList.remove('show'), 3000);
+}
+
 export function initUi() {
   initTheme();
   initMenu();
   initModal();
   initJournalFilters();
   initContactLinks();
+  document
+    .querySelectorAll('[data-toast]')
+    .forEach((button) => button.addEventListener('click', () => showToast(button.dataset.toast)));
   document
     .querySelector('[data-language-toggle]')
     .addEventListener('click', () => setLanguage(getLanguage() === 'id' ? 'en' : 'id'));

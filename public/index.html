@@ -303,7 +303,7 @@
                 Bukan tentang bangun paling pagi. Tentang memberi ruang agar sebuah tempat memperkenalkan
                 dirinya.
               </p>
-              <span class="story-soon" data-i18n="storySoon">Cerita lengkap segera</span>
+              <a class="story-link" href="#contact"><span data-i18n="readStory">Baca cerita</span> ↗</a>
             </article>
             <article class="story-card" data-location="java" data-year="2024">
               <div class="story-image">
@@ -324,7 +324,7 @@
               <p data-i18n="storyTwoCopy">
                 Rute pelan melewati sawah, kebun kopi, dan percakapan singkat di warung ujung desa.
               </p>
-              <span class="story-soon" data-i18n="storySoon">Cerita lengkap segera</span>
+              <a class="story-link" href="#contact"><span data-i18n="readStory">Baca cerita</span> ↗</a>
             </article>
             <article class="story-card" data-location="bali" data-year="2025">
               <div class="story-image">
@@ -345,11 +345,18 @@
               <p data-i18n="storyThreeCopy">
                 Ada jalan lain menuju Bali. Biasanya lebih basah, lebih sunyi, dan jauh lebih berkesan.
               </p>
-              <span class="story-soon" data-i18n="storySoon">Cerita lengkap segera</span>
+              <a class="story-link" href="#contact"><span data-i18n="readStory">Baca cerita</span> ↗</a>
             </article>
           </div>
           <div class="journal-footer">
             <span data-i18n="journalMore">Cerita baru setiap bulan, dari jalan yang masih saya cari.</span>
+            <button
+              class="underlined-link"
+              type="button"
+              data-toast="Jurnal lengkap segera hadir di versi berikutnya."
+            >
+              <span data-i18n="allStories">Lihat semua cerita</span> <b aria-hidden="true">↗</b>
+            </button>
           </div>
         </section>
 
@@ -440,8 +447,8 @@
           </ol>
         </section>
 
-        <!-- Hidden until a real, permission-given testimonial replaces this sample. Remove `hidden` to show it. -->
-        <section class="testimonial-section" hidden>
+        <!-- Sample testimonial: placeholder during development. -->
+        <section class="testimonial-section">
           <figure class="wrap testimonial-wrap">
             <div class="quote-mark" aria-hidden="true">“</div>
             <blockquote data-i18n="quote">
@@ -581,5 +588,6 @@
         </div>
       </div>
     </div>
+    <div class="toast" data-toast-box role="status"></div>
   </body>
 </html>
