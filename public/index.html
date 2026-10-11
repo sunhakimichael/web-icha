@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Jelajahku — local guide Jawa–Bali, travel planner, dan kelas bahasa online yang personal." />
+    <meta name="theme-color" content="#B5532F" />
+    <title>Jelajahku — Jalanmu, ceritamu.</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <div class="site-shell">
+      <header class="site-header" data-header>
+        <a class="brand" href="#top" aria-label="Jelajahku home">
+          <span class="brand-mark" aria-hidden="true"><span></span><span></span><span></span></span>
+          <span class="brand-word">Jelajah<span>ku</span></span>
+        </a>
+        <nav class="main-nav" data-nav aria-label="Main navigation">
+          <a href="#traveling" data-i18n="navTraveling">Traveling</a>
+          <a href="#learn" data-i18n="navLearn">Learn With Me</a>
+          <a href="#about" data-i18n="navAbout">Tentang Saya</a>
+          <a href="#contact" data-i18n="navContact">Kontak</a>
+        </nav>
+        <div class="header-actions">
+          <button class="text-control" type="button" data-language-toggle aria-label="Switch language">EN</button>
+          <button class="icon-button" type="button" data-theme-toggle aria-label="Toggle dark mode"><span data-theme-icon>☾</span></button>
+          <button class="menu-button" type="button" data-menu-toggle aria-label="Open menu"><span></span><span></span></button>
+        </div>
+      </header>
+
+      <main id="top">
+        <section class="hero" aria-labelledby="hero-title">
+          <div class="hero-image" role="img" aria-label="Pemandangan pegunungan Jawa saat matahari terbit"></div>
+          <div class="hero-overlay"></div>
+          <div class="hero-content wrap">
+            <p class="eyebrow light"><span class="eyebrow-dot"></span><span data-i18n="heroEyebrow">Jawa · Bali · Indonesia</span></p>
+            <h1 id="hero-title" data-i18n="heroTitle">Jalanmu,<br /><em>ceritamu.</em></h1>
+            <p class="hero-copy" data-i18n="heroCopy">Perjalanan yang lebih bermakna, dengan teman lokal yang tahu ke mana harus melangkah — dan kapan berhenti untuk menikmati.</p>
+            <div class="hero-actions">
+              <a class="button button-primary" href="#traveling" data-i18n="heroCtaOne">Jelajahi perjalanan <span>↗</span></a>
+              <a class="button button-ghost" href="#learn" data-i18n="heroCtaTwo">Belajar bersama saya <span>↗</span></a>
+            </div>
+            <div class="hero-aside">
+              <span class="aside-line"></span>
+              <span data-i18n="heroAside">Local guide · Travel planner · Language teacher</span>
+            </div>
+          </div>
+          <div class="hero-stamp" aria-hidden="true"><span>✳</span><small>go slow<br />go deep</small></div>
+          <a class="scroll-cue" href="#services" aria-label="Scroll to services"><span data-i18n="scrollLabel">scroll untuk menjelajah</span><i>↓</i></a>
+        </section>
+
+        <section class="intro wrap section-pad" id="services">
+          <div class="section-kicker"><span>01</span><i></i><span data-i18n="servicesKicker">Pilih cara menjelajah</span></div>
+          <div class="intro-heading">
+            <h2 data-i18n="servicesTitle">Tidak ada dua perjalanan<br /><em>yang benar-benar sama.</em></h2>
+            <p data-i18n="servicesCopy">Dari itinerary yang pelan dan penuh rasa sampai kelas bahasa yang membuka percakapan baru — saya bantu merangkai pengalaman yang terasa milikmu sendiri.</p>
+          </div>
+          <div class="service-grid" id="traveling">
+            <article class="service-card service-guide">
+              <div class="card-number">01</div>
+              <div class="service-icon">✦</div>
+              <p class="card-label" data-i18n="guideLabel">Traveling / 01</p>
+              <h3 data-i18n="guideTitle">Booking<br />Guide</h3>
+              <p data-i18n="guideCopy">Teman jalan untuk menemukan Jawa–Bali dengan ritme yang pas, dari satu hari sampai lintas pulau.</p>
+              <button class="card-link" type="button" data-booking="guide"><span data-i18n="viewPackages">Lihat paket</span><b>↗</b></button>
+            </article>
+            <article class="service-card service-plan">
+              <div class="card-number">02</div>
+              <div class="service-icon">⌁</div>
+              <p class="card-label" data-i18n="planLabel">Traveling / 02</p>
+              <h3 data-i18n="planTitle">Travel<br />Plan</h3>
+              <p data-i18n="planCopy">Itinerary yang dirancang dari kebiasaan, rasa penasaran, dan waktu yang benar-benar kamu punya.</p>
+              <button class="card-link" type="button" data-booking="plan"><span data-i18n="seeHow">Lihat cara kerja</span><b>↗</b></button>
+            </article>
+            <article class="service-card service-learn" id="learn">
+              <div class="card-number">03</div>
+              <div class="service-icon">Aa</div>
+              <p class="card-label" data-i18n="learnLabel">Learn With Me / 03</p>
+              <h3 data-i18n="learnTitle">Language<br />Classes</h3>
+              <p data-i18n="learnCopy">Belajar English atau Bahasa Indonesia lewat percakapan yang hangat, praktis, dan dekat dengan kehidupan.</p>
+              <button class="card-link" type="button" data-booking="learn"><span data-i18n="chooseClass">Pilih kelas</span><b>↗</b></button>
+            </article>
+          </div>
+        </section>
+
+        <section class="about-section section-pad" id="about">
+          <div class="about-layout wrap">
+            <div class="portrait-wrap">
+              <div class="portrait-frame"><img src="/manus-storage/async-images/lqtObfdhzVjnsPF3rWbEGC/image-2.webp" alt="Potret guide Jelajahku di jalan desa Jawa" /></div>
+              <div class="portrait-caption"><span>06° 10' S</span><span>106° 49' E</span></div>
+            </div>
+            <div class="about-copy">
+              <div class="section-kicker"><span>02</span><i></i><span data-i18n="aboutKicker">Sedikit tentang saya</span></div>
+              <h2 data-i18n="aboutTitle">Halo, saya <em>Raka.</em></h2>
+              <p class="lead" data-i18n="aboutLead">Saya percaya tempat baru paling mudah dicintai ketika kita punya waktu untuk mendengarkan ceritanya.</p>
+              <p data-i18n="aboutBody">Saya tumbuh di Jawa dan menghabiskan bertahun-tahun membawa tamu, teman, dan murid menyusuri sudut-sudut yang sering terlewat. Sekarang, saya merangkai pengalaman lokal, itinerary yang thoughtful, dan kelas bahasa online untuk kamu yang ingin datang lebih dekat — bukan sekadar datang.</p>
+              <div class="about-details"><span><b>3</b><small data-i18n="aboutDetailOne">bahasa sehari-hari</small></span><span><b>8+</b><small data-i18n="aboutDetailTwo">tahun menjelajah</small></span><span><b>∞</b><small data-i18n="aboutDetailThree">cerita untuk dibagi</small></span></div>
+              <a class="underlined-link" href="#contact"><span data-i18n="aboutCta">Kenalan lebih jauh</span> <b>↗</b></a>
+            </div>
+          </div>
+        </section>
+
+        <section class="journal-section wrap section-pad" id="journal">
+          <div class="journal-head">
+            <div><div class="section-kicker"><span>03</span><i></i><span data-i18n="journalKicker">Catatan perjalanan</span></div><h2 data-i18n="journalTitle">Dari jalan,<br /><em>untuk kamu.</em></h2></div>
+            <div class="journal-tools"><button class="filter-button active" type="button" data-filter="all" data-i18n="filterAll">Semua</button><button class="filter-button" type="button" data-filter="java">Jawa</button><button class="filter-button" type="button" data-filter="bali">Bali</button><button class="filter-button" type="button" data-filter="2025">2025</button></div>
+          </div>
+          <div class="journal-grid">
+            <article class="story-card story-featured" data-location="java" data-year="2025">
+              <div class="story-image"><img src="/manus-storage/async-images/lqtObfdhzVjnsPF3rWbEGC/image-3.webp" alt="Borobudur saat pagi berkabut" /><span class="story-tag">Jawa Tengah</span></div>
+              <div class="story-meta"><span>05.02.25</span><span>5 min read</span></div>
+              <h3 data-i18n="storyOneTitle">Mengejar kabut pagi<br />di Borobudur</h3><p data-i18n="storyOneCopy">Bukan tentang bangun paling pagi. Tentang memberi ruang agar sebuah tempat memperkenalkan dirinya.</p><a class="story-link" href="#contact"><span data-i18n="readStory">Baca cerita</span> ↗</a>
+            </article>
+            <article class="story-card" data-location="java" data-year="2024">
+              <div class="story-image"><img src="/story-rice-terraces.webp" alt="Lanskap sawah bertingkat di Jawa" /><span class="story-tag">Jawa Timur</span></div>
+              <div class="story-meta"><span>18.11.24</span><span>7 min read</span></div>
+              <h3 data-i18n="storyTwoTitle">Satu hari, tiga<br />warna hijau</h3><p data-i18n="storyTwoCopy">Rute pelan melewati sawah, kebun kopi, dan percakapan singkat di warung ujung desa.</p><a class="story-link" href="#contact"><span data-i18n="readStory">Baca cerita</span> ↗</a>
+            </article>
+            <article class="story-card" data-location="bali" data-year="2025">
+              <div class="story-image"><img src="/story-waterfall.jpg" alt="Air terjun tersembunyi di hutan tropis" /><span class="story-tag">Bali Utara</span></div>
+              <div class="story-meta"><span>29.08.25</span><span>4 min read</span></div>
+              <h3 data-i18n="storyThreeTitle">Bali yang memilih<br />untuk tidak ramai</h3><p data-i18n="storyThreeCopy">Ada jalan lain menuju Bali. Biasanya lebih basah, lebih sunyi, dan jauh lebih berkesan.</p><a class="story-link" href="#contact"><span data-i18n="readStory">Baca cerita</span> ↗</a>
+            </article>
+          </div>
+          <div class="journal-footer"><span data-i18n="journalMore">Cerita baru setiap bulan, dari jalan yang masih saya cari.</span><button class="underlined-link" type="button" data-toast="Jurnal lengkap segera hadir di versi berikutnya."><span data-i18n="allStories">Lihat semua cerita</span> <b>↗</b></button></div>
+        </section>
+
+        <section class="learn-section section-pad" id="classes">
+          <div class="wrap learn-layout">
+            <div class="learn-intro"><div class="section-kicker light"><span>04</span><i></i><span data-i18n="learnKicker">Learn with me</span></div><h2 data-i18n="learnSectionTitle">Bahasa baru,<br /><em>dunia yang lebih dekat.</em></h2><p data-i18n="learnSectionCopy">Kelas privat yang ringan tapi terarah — untuk traveler, expat, atau siapa pun yang ingin berbicara lebih percaya diri.</p><button class="button button-light" type="button" data-booking="learn"><span data-i18n="seeClassSchedule">Lihat jadwal kelas</span> <span>↗</span></button></div>
+            <div class="class-stack">
+              <article class="class-card"><span class="class-index">A</span><div><p class="card-label">Bahasa Indonesia</p><h3 data-i18n="classIdTitle">BIPA untuk<br />kehidupan nyata</h3><p data-i18n="classIdCopy">Untuk pemula sampai intermediate · 60 menit · privat</p></div><strong>Rp 180k<small>/ session</small></strong><button type="button" class="round-arrow" data-booking="learn" aria-label="Book Indonesian class">↗</button></article>
+              <article class="class-card"><span class="class-index">B</span><div><p class="card-label">English</p><h3 data-i18n="classEnTitle">English for<br />curious minds</h3><p data-i18n="classEnCopy">Conversation & travel English · 60 menit · privat/grup</p></div><strong>Rp 180k<small>/ session</small></strong><button type="button" class="round-arrow" data-booking="learn" aria-label="Book English class">↗</button></article>
+            </div>
+          </div>
+        </section>
+
+        <section class="process-section wrap section-pad">
+          <div class="section-kicker"><span>05</span><i></i><span data-i18n="processKicker">Sesederhana ini</span></div>
+          <div class="process-heading"><h2 data-i18n="processTitle">Mulai dari rasa penasaran.<br /><em>Berakhir jadi cerita.</em></h2><p data-i18n="processCopy">Tidak ada formulir panjang yang membingungkan. Ceritakan dulu ingin ke mana atau ingin belajar apa — kita mulai dari sana.</p></div>
+          <div class="process-steps"><div class="process-step"><span>01</span><h3 data-i18n="stepOneTitle">Cerita sedikit</h3><p data-i18n="stepOneCopy">Isi brief singkat atau pilih slot yang nyaman.</p></div><div class="process-step"><span>02</span><h3 data-i18n="stepTwoTitle">Kita ngobrol</h3><p data-i18n="stepTwoCopy">Saya susun arah, rute, dan ritme yang paling pas.</p></div><div class="process-step"><span>03</span><h3 data-i18n="stepThreeTitle">Berangkat / mulai</h3><p data-i18n="stepThreeCopy">Kamu dapat pengalaman yang terasa personal dan siap dijalani.</p></div></div>
+        </section>
+
+        <section class="testimonial-section">
+          <div class="wrap testimonial-wrap"><div class="quote-mark">“</div><blockquote data-i18n="quote">Raka membuat Jawa terasa seperti tempat yang sudah lama saya kenal. Bukan karena semuanya sempurna, tapi karena setiap momen terasa punya arti.</blockquote><div class="quote-by"><span class="avatar">M</span><span><b>Marina K.</b><small data-i18n="quoteRole">Traveler from Melbourne</small></span></div></div>
+        </section>
+
+        <section class="contact-section wrap section-pad" id="contact">
+          <div class="contact-card"><div><div class="section-kicker light"><span>06</span><i></i><span data-i18n="contactKicker">Mari mulai percakapan</span></div><h2 data-i18n="contactTitle">Punya tempat yang<br /><em>ingin kamu datangi?</em></h2><p data-i18n="contactCopy">Kirim pesan singkat. Tidak harus sudah punya rencana yang rapi — kita bisa merangkainya bersama.</p></div><a class="button button-light" href="https://wa.me/6281234567890" target="_blank" rel="noreferrer"><span data-i18n="contactCta">Sapa lewat WhatsApp</span> <span>↗</span></a></div>
+        </section>
+      </main>
+
+      <footer class="site-footer"><div class="wrap footer-top"><a class="brand brand-footer" href="#top"><span class="brand-mark" aria-hidden="true"><span></span><span></span><span></span></span><span class="brand-word">Jelajah<span>ku</span></span></a><p data-i18n="footerLine">A personal guide to going a little deeper.</p><div class="footer-socials"><a href="#contact">IG</a><a href="#contact">WA</a><a href="#contact">EM</a></div></div><div class="wrap footer-bottom"><span>© 2025 Jelajahku</span><span data-i18n="footerMade">Dibuat dengan niat baik, dari Jawa.</span><a href="#top" data-i18n="footerBack">Kembali ke atas ↑</a></div></footer>
+
+      <a class="whatsapp-float" href="https://wa.me/6281234567890" target="_blank" rel="noreferrer" aria-label="Chat on WhatsApp"><span>WA</span><i>↗</i></a>
+    </div>
+
+    <div class="modal-backdrop" data-modal hidden>
+      <div class="booking-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+        <button class="modal-close" type="button" data-modal-close aria-label="Close">×</button>
+        <div class="modal-kicker"><span class="eyebrow-dot"></span><span data-i18n="modalKicker">Demo booking flow</span></div>
+        <h2 id="modal-title" data-i18n="modalTitle">Mulai dari<br /><em>yang kamu mau.</em></h2>
+        <p data-i18n="modalCopy">Pilih layanan di bawah. Ini masih prototipe — belum ada pembayaran dan belum ada data yang dikirim.</p>
+        <div class="booking-options"><button type="button" class="booking-option active" data-option="guide"><span>01</span><strong data-i18n="modalGuide">Booking Guide</strong><small>Jawa · Bali</small></button><button type="button" class="booking-option" data-option="plan"><span>02</span><strong data-i18n="modalPlan">Travel Plan</strong><small>Custom itinerary</small></button><button type="button" class="booking-option" data-option="learn"><span>03</span><strong data-i18n="modalLearn">Learn With Me</strong><small>English · BIPA</small></button></div>
+        <form class="booking-form" data-booking-form><label><span data-i18n="formName">Nama kamu</span><input name="name" placeholder="e.g. Alex" required /></label><label><span data-i18n="formEmail">Email atau WhatsApp</span><input name="contact" placeholder="e.g. hello@email.com" required /></label><label><span data-i18n="formNote">Ceritakan sedikit</span><textarea name="note" rows="3" placeholder="Kapan kamu ingin mulai?" required></textarea></label><button class="button button-primary full-width" type="submit"><span data-i18n="formSubmit">Kirim minat saya</span> <span>↗</span></button></form>
+        <div class="booking-success" hidden><div class="success-symbol">✦</div><h3 data-i18n="successTitle">Pesanmu sudah tiba.</h3><p data-i18n="successCopy">Terima kasih — ini demo, jadi belum ada yang benar-benar terkirim. Di versi live, kamu akan diarahkan ke WhatsApp atau kalender.</p><button class="underlined-link" type="button" data-modal-close><span data-i18n="successClose">Tutup demo</span> ↗</button></div>
+      </div>
+    </div>
+
+    <div class="toast" data-toast-box role="status"></div>
+    <script src="/app.js" defer></script>
+  </body>
+</html>
