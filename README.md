@@ -155,3 +155,8 @@ storyFourCopy: 'A short English summary of the journey.',
 ```
 
 Pertahankan tinggi `.story-image` yang sama dengan kartu lain agar layout Catatan Perjalanan tetap seimbang.
+
+
+## Panduan lanjutan
+
+Baca [Panduan lokal, testing, dan hosting](docs/LOCAL-TESTING-AND-HOSTING.md) untuk langkah menambah foto/cerita, menguji perubahan sebelum push, serta menghubungkan repository ke Vercel atau Netlify.
