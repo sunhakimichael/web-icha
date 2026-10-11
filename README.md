@@ -1,162 +1,87 @@
 # NusaByIcha
 
-Website personal bilingual untuk **Icha** — local guide Jawa–Bali, travel planner, dan pengajar bahasa online.
+Website personal bilingual (ID/EN) untuk **Icha**: local guide Jawa–Bali, travel planner, dan pengajar bahasa online.
 
-## Tentang project
+## Fitur
 
-NusaByIcha membantu calon traveler untuk:
+- Landing page editorial dengan mode terang/gelap (mengikuti sistem, bisa diubah manual) dan bahasa ID/EN (mengikuti bahasa browser, bisa diubah manual).
+- Form dinamis untuk empat layanan: **Booking Guide**, **Travel Plan**, **Kelas Online**, dan **Kontak Umum**.
+  - Jawaban dikirim ke email Icha lewat [Web3Forms](https://web3forms.com). Setelah terkirim, pengunjung bisa melanjutkan percakapan di WhatsApp dengan ringkasan yang sudah terisi.
+  - Jika access key Web3Forms belum diisi, form otomatis beralih ke mode WhatsApp-only.
+  - Ada honeypot anti-spam, state loading, dan pesan error yang jujur. Isian tidak hilang saat gagal kirim atau saat bahasa diganti.
+- Catatan Perjalanan dengan filter lokasi, plus filter tahun yang dibuat otomatis dari data kartu.
+- Aksesibilitas: skip link, focus trap di modal, fokus kembali ke tombol pemicu, `aria-expanded`/`aria-pressed`, `:focus-visible`, dan `prefers-reduced-motion`.
+- SEO dan sharing: Open Graph/Twitter Card, favicon, canonical, JSON-LD, `robots.txt`, `sitemap.xml`.
+- Halaman [Kebijakan Privasi](public/privacy.html).
 
-- Menemukan pengalaman perjalanan lokal di Jawa dan Bali.
-- Mengirim brief **Booking Guide**.
-- Mengisi kuesioner **Travel Plan**.
-- Memilih alur **Booking Kelas Online**.
-- Mengirim pesan melalui **Kontak Umum**.
-- Beralih antara bahasa Indonesia dan Inggris.
-- Menggunakan mode terang atau gelap.
+## Struktur
 
-Website ini adalah prototipe/pilot interaktif. Form belum mengirim data ke layanan eksternal dan belum memiliki pembayaran nyata.
-
-## Fitur utama
-
-- Landing page editorial dengan hero lanskap Indonesia.
-- Foto profil Icha dari aset asli yang disediakan.
-- Catatan perjalanan dengan filter lokasi/tahun.
-- Form dinamis berbasis layanan dengan field ID/EN, pilihan tunggal/ganda, validasi field wajib, persetujuan kebijakan, dan pesan privasi.
-- Tombol WhatsApp menggunakan nomor `+6282146138885`.
-- Responsive layout untuk desktop dan mobile.
-- Output publish statis dari folder `public/`.
-
-## Struktur file
+Semua yang dipublikasikan ada di `public/`. Tidak ada build step dan tidak ada dependensi npm.
 
 ```text
-.
-├── index.html              # Markup halaman utama
-├── styles.css              # Sistem visual dan responsive layout
-├── app.js                  # Toggle bahasa, tema, modal, filter, dan form dinamis
-├── app.config.ts           # Metadata project WebDev
-├── manus-routes.json       # Manifest route website
-├── public/                 # Output statis yang dipakai preview/publish
-│   ├── index.html
-│   ├── styles.css
-│   ├── app.js
-│   ├── icha-photo.webp
-│   └── manus-routes.json
-└── README.md
+public/
+├── index.html            # Halaman utama
+├── privacy.html          # Kebijakan privasi (ID + EN)
+├── css/styles.css
+├── js/
+│   ├── config.js         # ← Nomor WhatsApp, key Web3Forms, link sosial
+│   ├── translations.js   # Semua teks ID/EN
+│   ├── forms.js          # Definisi pertanyaan tiap form
+│   ├── booking.js        # Render form, validasi, pengiriman
+│   ├── ui.js             # Tema, menu, modal, filter
+│   ├── i18n.js, storage.js, util.js, main.js
+├── img/                  # Foto (WebP, 2 ukuran) + og-image.jpg
+└── favicon.svg, apple-touch-icon.png, robots.txt, sitemap.xml
+scripts/check.sh          # Pemeriksaan statis (juga dijalankan di CI)
+vercel.json               # Output directory, header keamanan, dan cache
 ```
 
-## Menjalankan secara lokal
+## Konfigurasi
 
-Server preview menggunakan Python HTTP server pada port `3000` dan menyajikan folder `public/`:
+Semua pengaturan kontak ada di `public/js/config.js`:
+
+| Kunci            | Isi                                                                      |
+| ---------------- | ------------------------------------------------------------------------ |
+| `whatsappNumber` | Nomor WA tanpa `+`, dengan kode negara.                                  |
+| `web3formsKey`   | Access key dari web3forms.com (memang aman untuk publik). Kosong = mode WA. |
+| `instagramUrl`   | URL profil Instagram. Kosong = ikon disembunyikan.                       |
+| `email`          | Alamat email publik. Kosong = ikon disembunyikan.                        |
+
+Jika nomor WhatsApp diganti, ganti juga link `wa.me` di `privacy.html`. `check.sh` akan gagal kalau keduanya berbeda.
+
+**Domain:** URL `https://web-icha.vercel.app` dipakai di `index.html` (canonical, Open Graph, JSON-LD), `privacy.html`, `robots.txt`, dan `sitemap.xml`. Ganti semuanya setelah domain final ditentukan:
 
 ```bash
-python3 -m http.server 3000 --bind 0.0.0.0 --directory public
+grep -rl "web-icha.vercel.app" public | xargs sed -i '' 's#https://web-icha.vercel.app#https://DOMAIN-BARU#g'
 ```
 
-Lalu buka `http://localhost:3000`.
-
-## Validasi
+## Menjalankan lokal
 
 ```bash
-node --check app.js
-node --check public/app.js
-python3 -m json.tool public/manus-routes.json
+./scripts/check.sh --serve
 ```
 
-## Publish
+Perintah ini menjalankan pemeriksaan, lalu membuka preview di `http://127.0.0.1:3000`. Yang diperiksa: sintaks JS, file aset yang dirujuk benar-benar ada, tidak ada sisa `manus-storage`, kunci terjemahan ID/EN lengkap, hash CSP cocok dengan script inline, dan nomor WA konsisten.
 
-Build statis menggunakan kontrak berikut:
+Jika script inline di `<head>` diubah, perbarui hash `sha256-…` di `vercel.json`. Pesan error `check.sh` akan menunjukkan hash yang benar.
 
-```json
-{
-  "command": "true",
-  "outputDirectory": "public"
-}
-```
-
-Versi publik saat ini dikelola melalui Manus WebDev. Repository ini berisi source code dan asset project untuk backup serta pengembangan lanjutan.
-
-## Lisensi dan aset
-
-Foto profil Icha digunakan berdasarkan aset yang disediakan oleh pemilik website. Aset visual lanskap lainnya digunakan untuk kebutuhan desain website NusaByIcha.
-
-## Menjalankan dan men-deploy secara lokal
-
-### Menjalankan preview lokal
-
-Pastikan Python 3 tersedia, lalu jalankan dari root project:
+Format kode dengan Prettier (CI juga mengecek ini):
 
 ```bash
-cd web-icha
-python3 -m http.server 3000 --bind 127.0.0.1 --directory public
+npx prettier@3.3.3 --write public
 ```
 
-Buka `http://127.0.0.1:3000`. Untuk menghentikan server, tekan `Ctrl+C`.
+## Menambah cerita di Catatan Perjalanan
 
-### Menyiapkan output publish
+1. Siapkan foto dalam dua lebar (800 px dan 480 px, WebP), misalnya `public/img/story-bali-coast-800.webp` dan `-480.webp`.
+2. Tambahkan `<article class="story-card">` di `.journal-grid` pada `index.html`. Salin salah satu kartu yang ada, lalu isi `data-location` (`java`/`bali`) dan `data-year`. Tombol filter tahun akan muncul otomatis.
+3. Tambahkan `storyFourTitleHtml` dan `storyFourCopy` di **kedua** bahasa pada `public/js/translations.js`. Akhiran `Html` berarti teks boleh berisi markup seperti `<br />`; kunci lain selalu ditampilkan sebagai teks biasa.
+4. Jalankan `./scripts/check.sh`.
 
-Source utama berada di root, sedangkan folder `public/` adalah output yang disajikan dan dipublish. Setelah mengubah source, sinkronkan file statis:
+## Deploy
 
-```bash
-cp index.html styles.css app.js manus-routes.json public/
-node --check app.js
-node --check public/app.js
-python3 -m json.tool public/manus-routes.json >/dev/null
-```
+Hosting di Vercel. Lihat [docs/LOCAL-TESTING-AND-HOSTING.md](docs/LOCAL-TESTING-AND-HOSTING.md).
 
-### Deploy statis lokal atau hosting pilihan
+## Lisensi
 
-Gunakan `public/` sebagai **publish directory**. Untuk platform yang meminta konfigurasi build, gunakan:
-
-```json
-{
-  "build": {
-    "command": "true",
-    "outputDirectory": "public"
-  }
-}
-```
-
-Tidak ada backend atau database yang diperlukan untuk prototipe ini. Jika memakai hosting statis lokal, cukup jalankan HTTP server dari `public/`. Jangan deploy root project sebagai directory utama karena browser akan membutuhkan file dari `public/`.
-
-## Cara menambah foto dan cerita di Catatan Perjalanan
-
-1. Simpan foto yang sudah disetujui di `public/`, misalnya `public/story-bali-coast.webp`.
-2. Buka `index.html`, lalu tambahkan satu blok `.story-card` di dalam `.journal-grid`.
-3. Gunakan `data-location` seperti `java` atau `bali` dan `data-year` empat digit agar tombol filter tetap berfungsi.
-4. Gunakan `alt` text yang menjelaskan lokasi dan suasana foto.
-5. Tambahkan key judul dan ringkasan di **dua** bahasa pada objek `id` dan `en` di `app.js`, misalnya `storyFourTitle` dan `storyFourCopy`.
-6. Sinkronkan source ke `public/`, jalankan validasi, lalu commit.
-
-Contoh kartu baru:
-
-```html
-<article class="story-card" data-location="bali" data-year="2026">
-  <div class="story-image">
-    <img src="/story-bali-coast.webp" alt="Pantai pasir hitam Bali saat matahari terbenam" />
-    <span class="story-tag">Bali</span>
-  </div>
-  <div class="story-meta"><span>Jun 2026</span><span>5 min read</span></div>
-  <h3 data-i18n="storyFourTitle">Judul cerita<br />di sini</h3>
-  <p data-i18n="storyFourCopy">Ringkasan singkat cerita perjalanan.</p>
-  <a class="story-link" href="#contact"><span data-i18n="readStory">Baca cerita</span> ↗</a>
-</article>
-```
-
-Kemudian tambahkan terjemahannya di `app.js`:
-
-```js
-// di dalam id
-storyFourTitle: 'Judul cerita<br />di sini',
-storyFourCopy: 'Ringkasan singkat dalam Bahasa Indonesia.',
-
-// di dalam en
-storyFourTitle: 'A story title<br />goes here',
-storyFourCopy: 'A short English summary of the journey.',
-```
-
-Pertahankan tinggi `.story-image` yang sama dengan kartu lain agar layout Catatan Perjalanan tetap seimbang.
-
-
-## Panduan lanjutan
-
-Baca [Panduan lokal, testing, dan hosting](docs/LOCAL-TESTING-AND-HOSTING.md) untuk langkah menambah foto/cerita, menguji perubahan sebelum push, serta menghubungkan repository ke Vercel atau Netlify.
+Kode dirilis dengan lisensi MIT (lihat [LICENSE](LICENSE)). Foto, teks, dan identitas merek NusaByIcha adalah milik Icha dan **tidak** termasuk dalam lisensi tersebut.

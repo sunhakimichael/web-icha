@@ -1,131 +1,48 @@
-# Panduan lokal dan hosting web-icha
+# Panduan testing dan hosting web-icha
 
-## 1. Menambah foto dan cerita Catatan Perjalanan
-
-1. Simpan foto yang sudah disetujui di `public/`, misalnya `public/story-bali-coast.webp`.
-2. Tambahkan satu `.story-card` di `index.html` dalam `.journal-grid`.
-3. Isi `data-location` (`java`, `bali`, dan seterusnya) serta `data-year` empat digit agar filter lokasi/tahun berfungsi.
-4. Tambahkan `alt` text yang menjelaskan lokasi dan suasana foto.
-5. Tambahkan judul dan ringkasan dalam objek bahasa `id` dan `en` di `app.js`.
-6. Sinkronkan file ke output publish dan validasi:
-
-```bash
-cp index.html styles.css app.js manus-routes.json public/
-node --check app.js
-node --check public/app.js
-python3 -m json.tool public/manus-routes.json >/dev/null
-```
-
-Pertahankan tinggi `.story-image` agar semua kartu tetap seimbang.
-
-## 2. Menguji perubahan secara lokal
+## 1. Menguji perubahan secara lokal
 
 Dari root repository:
 
 ```bash
-python3 -m http.server 3000 --bind 127.0.0.1 --directory public
+./scripts/check.sh --serve
 ```
 
 Buka `http://127.0.0.1:3000`, lalu cek:
 
-- Hero dan foto profil tampil.
-- Toggle ID/EN mengubah teks.
-- Toggle dark mode bekerja.
-- Filter Catatan Perjalanan bekerja berdasarkan lokasi dan tahun.
-- Tombol layanan membuka form yang sesuai.
-- Form wajib menolak submit kosong dan tombol WhatsApp mengarah ke nomor terbaru.
+- Hero, foto profil, dan foto cerita tampil.
+- Toggle ID/EN mengubah semua teks, termasuk form yang sedang terbuka (isian tidak hilang).
+- Toggle mode gelap bekerja dan tidak berkedip saat halaman dimuat ulang.
+- Filter Catatan Perjalanan bekerja per lokasi dan per tahun.
+- Setiap tombol layanan membuka form yang sesuai. Form bisa diisi hanya dengan keyboard (Tab, Shift+Tab, Esc menutup dan fokus kembali ke tombol).
+- Submit kosong ditolak, dan grup checkbox wajib menampilkan pesan.
+- Submit lengkap:
+  - **Mode WhatsApp** (`web3formsKey` kosong): WhatsApp terbuka dengan ringkasan isian.
+  - **Mode Web3Forms**: email masuk ke Icha, lalu muncul layar sukses dengan tombol "Lanjut di WhatsApp". Coba juga dalam keadaan offline (DevTools → Network → Offline): harus muncul pesan error, tombol "Coba lagi", dan isian tetap ada.
+- Uji di lebar ponsel (375 px). Field form tidak boleh membuat Safari iOS zoom.
 
-Periksa endpoint manifest di terminal lain:
+## 2. Mengaktifkan pengiriman form (Web3Forms)
 
-```bash
-curl -I http://127.0.0.1:3000/
-curl http://127.0.0.1:3000/manus-routes.json
-```
+1. Buka <https://web3forms.com>, lalu masukkan **email Icha** untuk membuat access key. Key akan dikirim ke email tersebut.
+2. Isi key di `public/js/config.js` → `web3formsKey`. Key ini memang dirancang untuk ditaruh di kode frontend.
+3. Commit dan deploy, lalu kirim satu form percobaan dan pastikan email benar-benar masuk (cek juga folder spam).
 
-Jika semua sudah benar, hentikan server dengan `Ctrl+C`, lalu commit dan push:
+## 3. Deploy ke Vercel
 
-```bash
-git add .
-git commit -m "Describe the change"
-git push github main
-```
-
-## 3. Deploy otomatis ke Vercel
-
-Vercel dapat membuat Preview Deployment untuk push/branch dan Production Deployment saat perubahan masuk ke production branch. Repository GitHub dapat dihubungkan dari **Vercel Dashboard → New Project**. [1]
+`vercel.json` di root sudah mengatur `outputDirectory: public`, header keamanan (CSP, dll.), dan cache. Langkahnya:
 
 1. Masuk ke [Vercel](https://vercel.com) dengan GitHub.
-2. Pilih **Add New → Project**, lalu import `sunhakimichael/web-icha`.
-3. Atur:
-   - **Framework Preset:** `Other`
-   - **Root Directory:** `.`
-   - **Build Command:** kosongkan atau nonaktifkan override karena tidak ada proses build.
-   - **Output Directory:** `public`
-   - **Production Branch:** `main`
-4. Klik **Deploy**.
-5. Setelah itu setiap push ke `main` akan membuat deployment production; push ke branch lain dapat menghasilkan Preview Deployment. [1]
+2. **Add New → Project**, lalu import `sunhakimichael/web-icha`.
+3. Framework Preset: `Other`. Pengaturan lain biarkan default, karena sudah diambil dari `vercel.json`.
+4. Klik **Deploy**. Push ke `main` akan menjadi production, sedangkan push ke branch lain menghasilkan Preview Deployment.
+5. Setelah domain final ditentukan (**Settings → Domains**), ganti `web-icha.vercel.app` di semua file (lihat README bagian *Konfigurasi*).
 
-Untuk proyek HTML/CSS/JS tanpa build, Vercel menjelaskan bahwa preset `Other` dapat melayani folder `public` bila folder tersebut tersedia, atau output directory dapat diatur manual. [2]
+### Setelah deploy
 
-## 4. Deploy otomatis ke Netlify
+- Bagikan link ke WhatsApp/Instagram dan pastikan pratinjau gambar (Open Graph) muncul. Kalau pratinjau lama masih tersimpan, cek ulang lewat <https://developers.facebook.com/tools/debug/>.
+- Jalankan Lighthouse (Chrome DevTools → Lighthouse) untuk Performance, Accessibility, Best Practices, dan SEO.
+- Buka DevTools → Console dan pastikan tidak ada pelanggaran CSP.
 
-Netlify dapat menghubungkan repository GitHub dan menjalankan deploy setiap kali ada push ke Git provider. Pengaturan build dapat diisi saat membuat site atau melalui **Project configuration → Developer settings → Continuous deployment → Build settings**. [3]
+## 4. Alur kerja yang disarankan
 
-1. Masuk ke [Netlify](https://app.netlify.com) dengan GitHub.
-2. Pilih **Add new project → Import an existing project → GitHub**.
-3. Pilih `sunhakimichael/web-icha`.
-4. Atur:
-   - **Base directory:** kosong / root repository.
-   - **Build command:** `true`
-   - **Publish directory:** `public`
-   - **Production branch:** `main`
-5. Klik **Deploy site**.
-6. Setiap push ke `main` akan memicu build dan deploy otomatis selama builds aktif. [3]
-
-Netlify juga dapat menyimpan pengaturan tersebut sebagai `netlify.toml` di root repository. Konsep `publish directory` adalah folder yang berisi file HTML dan asset siap deploy. [3]
-
-Contoh `netlify.toml`:
-
-```toml
-[build]
-  command = "true"
-  publish = "public"
-```
-
-## 5. Alur kerja yang disarankan
-
-Gunakan branch fitur untuk perubahan besar, uji secara lokal, lalu push ke GitHub. Biarkan Vercel atau Netlify membuat Preview Deployment. Setelah hasilnya disetujui, merge ke `main` untuk deployment production.
-
-## Referensi resmi
-
-[1]: https://vercel.com/docs/git "Deploying Git Repositories with Vercel"
-[2]: https://vercel.com/docs/builds/configure-a-build "Configuring a Build on Vercel"
-[3]: https://docs.netlify.com/build/configure-builds/overview/ "Netlify Build Configuration Overview"
-
-## Skrip cepat sinkronisasi dan testing
-
-Gunakan skrip bawaan repository agar langkah sinkronisasi dan validasi tidak perlu diketik ulang:
-
-```bash
-./scripts/sync-and-test.sh --check-only
-```
-
-Perintah tersebut menyalin `index.html`, `styles.css`, `app.js`, dan `manus-routes.json` ke `public/`, lalu menjalankan pemeriksaan JavaScript dan JSON.
-
-Untuk sekaligus menyalakan preview lokal:
-
-```bash
-./scripts/sync-and-test.sh
-```
-
-Preview tersedia di `http://127.0.0.1:3000`. Port dapat diubah:
-
-```bash
-./scripts/sync-and-test.sh --port 8080
-```
-
-Tekan `Ctrl+C` untuk menghentikan server.
-
-## Audit konfigurasi repository
-
-Repository saat ini sengaja tidak memiliki `package.json`, `vercel.json`, `netlify.toml`, Dockerfile, atau workflow GitHub Actions. Website ini adalah static HTML/CSS/JavaScript tanpa proses build dan tanpa backend. Pengaturan `public/` dapat diisi melalui dashboard Vercel/Netlify seperti panduan di atas; skrip lokal menangani sinkronisasi output sebelum push.
+Gunakan branch fitur, jalankan `./scripts/check.sh`, lalu push. GitHub Actions (`.github/workflows/check.yml`) menjalankan pemeriksaan yang sama plus cek format Prettier. Review hasilnya di Preview Deployment Vercel, lalu merge ke `main`.
