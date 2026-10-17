@@ -6,7 +6,7 @@
   --cream: #faf5ec;
   --paper: #f3ede2;
   --ink: #24221e;
-  --muted: #716c63;
+  --muted: #5f5a52;
   --line: rgba(36, 34, 30, 0.14);
   --serif: 'Cormorant Garamond', Georgia, serif;
   --sans: 'DM Sans', Arial, sans-serif;
@@ -449,7 +449,7 @@ html.dark {
   color: #302c25;
 }
 .service-learn {
-  background: var(--sage);
+  background: #5f765a; /* darker than --sage so white text reaches 4.5:1 */
   color: #fff;
 }
 .card-number {
@@ -765,7 +765,7 @@ html.dark {
   font-size: 28px;
 }
 .class-card .card-label {
-  color: var(--terracotta);
+  color: #a34a29;
   margin-bottom: 7px;
 }
 .class-card h3 {
@@ -1800,7 +1800,7 @@ html.dark .group-error {
 html.dark .class-card,
 html.dark .testimonial-section {
   --ink: #24221e;
-  --muted: #716c63;
+  --muted: #5f5a52;
   --line: rgba(36, 34, 30, 0.14);
   color: var(--ink);
 }

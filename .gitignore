@@ -10,3 +10,6 @@ node_modules/
 
 # Dokumen rencana lokal (tidak di-commit)
 /Rencana-Pengerjaan-*.docx
+
+# Personal prompt templates (local only)
+/Prompt - *.md
