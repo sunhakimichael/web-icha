@@ -787,7 +787,7 @@ html.dark {
   font-weight: 600;
 }
 .class-card strong small {
-  font: 10px var(--sans);
+  font: 11px var(--sans);
   display: block;
   color: var(--muted);
   text-align: right;
