@@ -2,6 +2,8 @@
 
 Website personal bilingual (ID/EN) untuk **Icha**: local guide Jawa–Bali, travel planner, dan pengajar bahasa online.
 
+**Situs:** <https://web-icha.vercel.app>
+
 ## Fitur
 
 - Landing page editorial dengan mode terang/gelap (mengikuti sistem, bisa diubah manual) dan bahasa ID/EN (mengikuti bahasa browser, bisa diubah manual).
@@ -80,7 +82,7 @@ npx prettier@3.3.3 --write public
 
 ## Deploy
 
-Hosting di Vercel. Lihat [docs/LOCAL-TESTING-AND-HOSTING.md](docs/LOCAL-TESTING-AND-HOSTING.md).
+Hosting di Vercel: <https://web-icha.vercel.app>. Setiap push ke `main` otomatis di-deploy ke production. Lihat [docs/LOCAL-TESTING-AND-HOSTING.md](docs/LOCAL-TESTING-AND-HOSTING.md).
 
 ## Lisensi
 
