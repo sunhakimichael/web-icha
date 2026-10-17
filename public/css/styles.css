@@ -1797,3 +1797,13 @@ html.dark .group-error {
 .legal-back {
   margin-top: 64px;
 }
+
+/* ---------- Dark mode: blocks that keep a light background ---------- */
+/* Class cards and the testimonial stay cream in dark mode, so their text keeps the light-mode colors. */
+html.dark .class-card,
+html.dark .testimonial-section {
+  --ink: #24221e;
+  --muted: #716c63;
+  --line: rgba(36, 34, 30, 0.14);
+  color: var(--ink);
+}
