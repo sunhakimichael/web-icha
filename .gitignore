@@ -13,3 +13,9 @@ node_modules/
 
 # Personal prompt templates (local only)
 /Prompt - *.md
+
+# Personal multi-task workflow (local only)
+icha-workflow/
+
+# Personal Claude Code memory (local only)
+CLAUDE.local.md

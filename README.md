@@ -4,6 +4,8 @@ Website personal bilingual (ID/EN) untuk **Icha**: local guide Jawa–Bali, trav
 
 **Situs:** <https://web-icha.vercel.app>
 
+**Dokumentasi teknis:** [`ai-doc/`](ai-doc/) — [overview](ai-doc/overview.md), [tech stack](ai-doc/tech-stack.md), [alur logika](ai-doc/logic-flow.md), [schema data](ai-doc/schema.md).
+
 ## Fitur
 
 - Landing page editorial dengan mode terang/gelap (mengikuti sistem, bisa diubah manual) dan bahasa ID/EN (mengikuti bahasa browser, bisa diubah manual).
